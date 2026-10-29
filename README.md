@@ -2,7 +2,9 @@
 
 **Own the last move.** A complete, mobile-first territory strategy arcade game by BlackHouse Games.
 
-Play: **https://kalikeefbiz.github.io/Zero-Claim/**
+Play: **https://blackhouse-zero-claim.pages.dev/** (verified production release).
+
+GitHub Pages target: `https://kalikeefbiz.github.io/Zero-Claim/` — prepared, but Pages must first be enabled by the repository owner.
 
 One Quick Match. A 6×6 field. You versus a tactical CPU. Procedural board components, mechanical countdown feedback, synthesized audio, and the BlackHouse ink / ivory / brass / oxide identity. No accounts, downloads, ads, tracking, or external assets.
 
@@ -60,5 +62,15 @@ Tile-value fields use rotational symmetry; seeds vary each match. Opening turns 
 ## Deploy
 
 Vite's base is **`/Zero-Claim/`** (case-sensitive). `.github/workflows/deploy.yml` runs rules tests, a production build, Chromium and WebKit browser tests, then uploads and deploys `dist/` to GitHub Pages on pushes to `main`. Pull requests verify without deploying. In repository Settings → Pages, choose **GitHub Actions** as the source. No secrets are required; deployment uses GitHub's Pages OIDC permissions.
+
+Production currently uses a connected **Cloudflare Pages** project, `blackhouse-zero-claim`, because the GitHub integration cannot enable Pages (HTTP 403). It builds `main` with Node 24, `npm test && npm run build -- --base=/`, and serves `dist/`. The root base is a deployment override; the default GitHub Pages base stays `/Zero-Claim/`. No functions, backend, analytics or custom DNS were added.
+
+To verify the public deployment with the same browser suite:
+
+```sh
+PLAYWRIGHT_BASE_URL=https://blackhouse-zero-claim.pages.dev/ npm run test:browser
+```
+
+GitHub Actions verification passes. Its deploy job currently fails with 404 because GitHub Pages is disabled. Enable **Settings → Pages → GitHub Actions**, then rerun that job to publish the GitHub URL as well.
 
 See [release verification](docs/RELEASE.md) for the evidence and practical limits of testing.

@@ -26,4 +26,15 @@ Reviewed portrait and desktop screenshots, core positioning, capture feedback, o
 
 ## Deployment
 
-The production target is `https://kalikeefbiz.github.io/Zero-Claim/` with Vite base `/Zero-Claim/`. GitHub Actions builds and deploys the tested static bundle from `main`; the deployment environment exposes the actual Pages URL. A successful deployment must also be checked over HTTPS and opened in a browser before being reported as live.
+**Verified live:** https://blackhouse-zero-claim.pages.dev/ on 2026-10-29. Cloudflare Pages deployed the tested implementation from commit `df925ce8855d7a56d380c1ea5133f242bd3137e9`. HTTPS returned 200; **all 10 browser checks also passed against the public production origin**, including full matches and replay in Chromium and iPhone WebKit. The release documentation commit changes no game assets.
+
+GitHub Actions [verification run](https://github.com/kalikeefbiz/Zero-Claim/actions/runs/40799767477) passed the 36 rules tests, production build and all 10 browser tests. Its separate GitHub Pages deployment job failed with HTTP 404 because Pages is not enabled. Attempting to enable it through the available GitHub integration returned HTTP 403 ("Resource not accessible by integration"). The owner can enable **Settings → Pages → GitHub Actions** and rerun deployment. The fallback is a static Cloudflare Pages project linked to `main`, using Node 24 and `npm test && npm run build -- --base=/`. No functions or backend were created.
+
+The prepared GitHub production target is `https://kalikeefbiz.github.io/Zero-Claim/` with Vite base `/Zero-Claim/`. GitHub Actions builds and deploys the tested static bundle from `main`; the deployment environment exposes the actual Pages URL. A successful deployment must also be checked over HTTPS and opened in a browser before being reported as live.
+
+## Screenshots from the public release
+
+- [iPhone title](screenshots/iphone-title.png)
+- [iPhone match](screenshots/iphone-match.png)
+- [iPhone results](screenshots/iphone-results.png)
+- [Desktop title](screenshots/desktop-title.png)
